@@ -16,5 +16,6 @@ pod 'SnapKit', '~> 3.2.0'
 pod 'Kingfisher', '~> 3.0'
 pod 'ESPullToRefresh'
 pod 'PKHUD', '~> 4.0'
+pod 'SCLAlertView'
 
 end

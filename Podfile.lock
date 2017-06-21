@@ -17,6 +17,7 @@ PODS:
     - RxCocoa (~> 3.0)
     - RxSwift (~> 3.0)
   - RxSwift (3.5.0)
+  - SCLAlertView (0.7.0)
   - SnapKit (3.2.0)
   - SwiftyUserDefaults (3.0.0)
 
@@ -30,6 +31,7 @@ DEPENDENCIES:
   - RxCocoa (~> 3.0)
   - RxDataSources
   - RxSwift (~> 3.0)
+  - SCLAlertView
   - SnapKit (~> 3.2.0)
   - SwiftyUserDefaults
 
@@ -44,9 +46,10 @@ SPEC CHECKSUMS:
   RxCocoa: a0a09f45d0e5b48ecb6a4a7b4b4c89c88d3f633f
   RxDataSources: b3389acc5fe2eefb8fcd81a2b76a876ad08bc82a
   RxSwift: 18ee9d78b45edb3b0b7e79916b47a116e6dbc842
+  SCLAlertView: 8a14ffc40590c619e183eed2298b854385f30be1
   SnapKit: 1ca44df72cfa543218d177cb8aab029d10d86ea7
   SwiftyUserDefaults: 0f1d45fc3aafb9064dac661e367f8f83fe21a4b4
 
-PODFILE CHECKSUM: 3edb9a9c6d3c88f746c66e7d67371972346d2393
+PODFILE CHECKSUM: 4b4bf18914c866e2c60bc90469774a736e281fc8
 
 COCOAPODS: 1.2.0

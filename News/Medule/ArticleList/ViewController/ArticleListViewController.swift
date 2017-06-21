@@ -14,6 +14,8 @@ import RxDataSources
 import SnapKit
 import ESPullToRefresh
 import PKHUD
+import WebKit
+
 
 class ArticleListViewController: BaseViewController, UITableViewDelegate,UITableViewDataSource {
     var page = 0
@@ -130,7 +132,10 @@ class ArticleListViewController: BaseViewController, UITableViewDelegate,UITable
                 HUD.hide()
             }, onError: { (error) in
                 print(error)
-                HUD.show(.label("error"))
+                self.tableView.reloadData()
+                HUD.flash(.label("No news,\nPlease change another source"), onView: self.navigationController?.view, delay: 3, completion: { (finish) in
+                    
+                })
             }, onCompleted: {
                 print("complete")
                 self.tableView.es_stopPullToRefresh()
@@ -155,6 +160,18 @@ class ArticleListViewController: BaseViewController, UITableViewDelegate,UITable
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
+        let model: ArticleModel = self.viewModel.articleArray[indexPath.row] as! ArticleModel
+        
+        let webView = BaseWKWebViewController()
+        webView.rightBarButtonItemTitle = "Share"
+        webView.rightBarButtonItemTag = "Share"
+        webView.delegate = self
+        webView.title = model.title
+        webView.load_UrlSting(string: model.url)
+        navigationController?.pushViewController(webView, animated: true)
+        
+        
+        tableView.deselectRow(at: indexPath, animated: false)
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -163,7 +180,9 @@ class ArticleListViewController: BaseViewController, UITableViewDelegate,UITable
     
     
     func setAction() {
+        let vc = SettingViewController()
         
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     func sourceBtnAction() {
@@ -190,4 +209,26 @@ class ArticleListViewController: BaseViewController, UITableViewDelegate,UITable
     }
     */
 
+}
+
+extension ArticleListViewController:WKWebViewDelegate{
+    
+    func didSelectRightItem(webView: WKWebView, itemTag: String) {
+        print("点击了右边按钮")
+        if itemTag == "Share" {
+            let activity = UIActivity.init()
+            let items:[Any] = [webView.title as Any,
+                               URL(string: (webView.url?.absoluteString)!) as Any]
+            let activityVC = UIActivityViewController.init(activityItems: items, applicationActivities: [activity])
+            self.present(activityVC, animated:true, completion:nil)
+        }
+    }
+//    
+//    func didRunJavaScript(webView: WKWebView, result: Any?, error: Error?) {
+//        print("执行JS结果")
+//    }
+//    
+//    func didAddScriptMessage(webView: WKWebView, message: WKScriptMessage) {
+//        print("=====\(message.body)")
+//    }
 }

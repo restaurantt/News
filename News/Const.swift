@@ -8,7 +8,7 @@
 
 import UIKit
 
-//let NewsAPIKey = "7f4c52742eb94137b0f2506e4ccd9fbd"
+let NewsAPIKey = "7f4c52742eb94137b0f2506e4ccd9fbd"
 let ScreenWidth = UIScreen.main.bounds.size.width
 let ScreenHeight = UIScreen.main.bounds.size.height
 

@@ -78,7 +78,9 @@ class SourceViewController: BaseViewController, UICollectionViewDelegate,UIColle
                 HUD.hide()
             }, onError: { (error) in
                 print(error)
-                HUD.show(.label("error"))
+                HUD.flash(.label("No Sources"), onView: self.navigationController?.view, delay: 3, completion: { (finish) in
+                    
+                })
             }, onCompleted: {
                 print("complete")
                 

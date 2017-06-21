@@ -13,6 +13,8 @@
 		DB6D6C201EF7CE4E007827EE /* BaseSourceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB6D6C1F1EF7CE4E007827EE /* BaseSourceModel.swift */; };
 		DB6D6C221EF8BD6F007827EE /* SourceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB6D6C211EF8BD6F007827EE /* SourceCell.swift */; };
 		DB6D6C241EF8BE18007827EE /* SourceHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB6D6C231EF8BE18007827EE /* SourceHeaderView.swift */; };
+		DB6D6C261EF91017007827EE /* BaseWKWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB6D6C251EF91017007827EE /* BaseWKWebViewController.swift */; };
+		DB6D6C331EFA192D007827EE /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB6D6C321EFA192D007827EE /* SettingViewController.swift */; };
 		DBA3AEC91EF107FC00BD86AB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA3AEC81EF107FC00BD86AB /* AppDelegate.swift */; };
 		DBA3AECE1EF107FC00BD86AB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DBA3AECC1EF107FC00BD86AB /* Main.storyboard */; };
 		DBA3AED01EF107FC00BD86AB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DBA3AECF1EF107FC00BD86AB /* Assets.xcassets */; };
@@ -60,6 +62,8 @@
 		DB6D6C1F1EF7CE4E007827EE /* BaseSourceModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseSourceModel.swift; sourceTree = "<group>"; };
 		DB6D6C211EF8BD6F007827EE /* SourceCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SourceCell.swift; sourceTree = "<group>"; };
 		DB6D6C231EF8BE18007827EE /* SourceHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SourceHeaderView.swift; sourceTree = "<group>"; };
+		DB6D6C251EF91017007827EE /* BaseWKWebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseWKWebViewController.swift; sourceTree = "<group>"; };
+		DB6D6C321EFA192D007827EE /* SettingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		DBA3AEC51EF107FC00BD86AB /* News.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = News.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DBA3AEC81EF107FC00BD86AB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DBA3AECD1EF107FC00BD86AB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -175,6 +179,46 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
+		DB6D6C2D1EFA1791007827EE /* Set */ = {
+			isa = PBXGroup;
+			children = (
+				DB6D6C2E1EFA1791007827EE /* Model */,
+				DB6D6C2F1EFA1791007827EE /* View */,
+				DB6D6C301EFA1791007827EE /* ViewController */,
+				DB6D6C311EFA1791007827EE /* ViewModel */,
+			);
+			path = Set;
+			sourceTree = "<group>";
+		};
+		DB6D6C2E1EFA1791007827EE /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		DB6D6C2F1EFA1791007827EE /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		DB6D6C301EFA1791007827EE /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				DB6D6C321EFA192D007827EE /* SettingViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		DB6D6C311EFA1791007827EE /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		DBA3AEBC1EF107FC00BD86AB = {
 			isa = PBXGroup;
 			children = (
@@ -245,6 +289,7 @@
 			children = (
 				DBA3AF081EF2641200BD86AB /* ArticleList */,
 				DB6D6C141EF7C11D007827EE /* Source */,
+				DB6D6C2D1EFA1791007827EE /* Set */,
 			);
 			path = Medule;
 			sourceTree = "<group>";
@@ -300,6 +345,7 @@
 				DBA3AF121EF26CC800BD86AB /* BaseModel.swift */,
 				DBA3AF181EF2845200BD86AB /* BaseViewController.swift */,
 				DBA3AF1E1EF3C7B100BD86AB /* BaseNavigationController.swift */,
+				DB6D6C251EF91017007827EE /* BaseWKWebViewController.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -494,7 +540,9 @@
 				DBA3AF111EF264EB00BD86AB /* ArticleListViewModel.swift in Sources */,
 				DBA3AF211EF76A2A00BD86AB /* ArticleCell.swift in Sources */,
 				DB6D6C1A1EF7CDB7007827EE /* SourceViewController.swift in Sources */,
+				DB6D6C331EFA192D007827EE /* SettingViewController.swift in Sources */,
 				DB6D6C241EF8BE18007827EE /* SourceHeaderView.swift in Sources */,
+				DB6D6C261EF91017007827EE /* BaseWKWebViewController.swift in Sources */,
 				DBA3AF151EF26CDB00BD86AB /* ArticleModel.swift in Sources */,
 				DBA3AF1B1EF2847700BD86AB /* ArticleListViewController.swift in Sources */,
 				DBA3AF131EF26CC800BD86AB /* BaseModel.swift in Sources */,
