@@ -69,11 +69,15 @@ class SettingViewController: BaseViewController, UITableViewDelegate,UITableView
 
     func showAbout() {
         let appearance = SCLAlertView.SCLAppearance(
-            showCircularIcon: true
+            
+            kCircleIconHeight: 55.0,
+            showCircularIcon: false
+            
         )
         let alertView = SCLAlertView(appearance: appearance)
-        let alertViewIcon = UIImage(named: "setIcon") //Replace the IconImage text with the image name
-        alertView.showInfo("About", subTitle: "asdfghjkl", closeButtonTitle: "close", duration: 0, colorStyle: 0xA429FF, colorTextButton: 0x000000, circleIconImage: alertViewIcon, animationStyle: .noAnimation)
+        let alertViewIcon = UIImage(named: "logo") //Replace the IconImage text with the image name
+        alertView.iconTintColor = .white
+        alertView.showInfo("About", subTitle: "Headline News is an app which contains headlines of many presses.", closeButtonTitle: "close", duration: 0, colorStyle: 0x000000, colorTextButton: 0xffffff, circleIconImage: alertViewIcon, animationStyle: .noAnimation)
         //alertView.showInfo("Custom icon", subTitle: "This is a nice alert with a custom icon you choose", circleIconImage: alertViewIcon)
     }
     

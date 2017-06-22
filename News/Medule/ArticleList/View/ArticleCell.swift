@@ -65,8 +65,13 @@ class ArticleCell: UITableViewCell {
     
     var model: ArticleModel? {
         willSet {
+            
             let url = URL(string: (newValue?.urlToImage)!)
-            thumbView.kf.setImage(with: url)
+            thumbView.kf.setImage(with: url, placeholder: UIImage(named: "logo"), options: nil, progressBlock: { (current, total) in
+                
+            }) { (image, error, CacheType, imageUrl) in
+                
+            }
             titleLbl.text = newValue?.title
             detailLbl.text = newValue?.detailDescription
             

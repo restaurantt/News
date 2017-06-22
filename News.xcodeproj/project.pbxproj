@@ -421,6 +421,7 @@
 				TargetAttributes = {
 					DBA3AEC41EF107FC00BD86AB = {
 						CreatedOnToolsVersion = 8.3.2;
+						DevelopmentTeam = 7ALBEQ9P8C;
 						ProvisioningStyle = Automatic;
 					};
 					DBA3AED81EF107FC00BD86AB = {
@@ -708,9 +709,11 @@
 			baseConfigurationReference = 1A7DC5BB7B9D7D0B0CCFC784 /* Pods-News.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 7ALBEQ9P8C;
 				INFOPLIST_FILE = News/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = gjj.News;
+				PRODUCT_BUNDLE_IDENTIFIER = com.gjj.headlinenews;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -721,9 +724,11 @@
 			baseConfigurationReference = 3B4C17BCCAD9BCF6C95DBC2D /* Pods-News.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 7ALBEQ9P8C;
 				INFOPLIST_FILE = News/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = gjj.News;
+				PRODUCT_BUNDLE_IDENTIFIER = com.gjj.headlinenews;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};

@@ -15,7 +15,12 @@ import SnapKit
 import ESPullToRefresh
 import PKHUD
 import WebKit
+import SwiftyUserDefaults
 
+extension DefaultsKeys {
+    static let defautSourceUrl = DefaultsKey<String>("defautSourceUrl")
+    static let defautSource = DefaultsKey<String>("defautSource")
+}
 
 class ArticleListViewController: BaseViewController, UITableViewDelegate,UITableViewDataSource {
     var page = 0
@@ -42,7 +47,15 @@ class ArticleListViewController: BaseViewController, UITableViewDelegate,UITable
         let leftItem = UIBarButtonItem(image: UIImage(named: "setIcon"), style: UIBarButtonItemStyle.plain, target: self, action: #selector(self.setAction))
         self.navigationItem.leftBarButtonItem = leftItem;
         
-        sourceBtn.kf.setImage(with: URL(string: defaultSourceUrl), for: .normal)
+        
+        var url: String
+        if Defaults.hasKey("defautSourceUrl") {
+            url = Defaults[.defautSourceUrl]
+        } else {
+            url = defaultSourceUrl
+        }
+        
+        sourceBtn.kf.setImage(with: URL(string: url), for: .normal)
 //        sourceBtn.setImage(UIImage(named: "setIcon"), for: .normal)
         sourceBtn.frame = CGRect.init(x: 0, y: 0, width: 30, height: 30)
         sourceBtn.addTarget(self, action: #selector(self.sourceBtnAction), for: .touchUpInside)
@@ -122,6 +135,15 @@ class ArticleListViewController: BaseViewController, UITableViewDelegate,UITable
     
     func requestData() {
         HUD.show(.systemActivity)
+        
+        
+        if Defaults.hasKey("defautSource") {
+            currentSource = Defaults[.defautSource]
+        } else {
+            currentSource = defaultSource
+        }
+        
+        
         viewModel.getArticles(page: page, source: currentSource)
             .subscribe(onNext: { (model: BaseArticleModel) in
                 if (model.articles?.count)! > 0 {
@@ -163,7 +185,8 @@ class ArticleListViewController: BaseViewController, UITableViewDelegate,UITable
         let model: ArticleModel = self.viewModel.articleArray[indexPath.row] as! ArticleModel
         
         let webView = BaseWKWebViewController()
-        webView.rightBarButtonItemTitle = "Share"
+//        webView.rightBarButtonItemTitle = "Share"
+        webView.rightBarButtonItemImage = "action"
         webView.rightBarButtonItemTag = "Share"
         webView.delegate = self
         webView.title = model.title
@@ -192,6 +215,11 @@ class ArticleListViewController: BaseViewController, UITableViewDelegate,UITable
         vc.didSelectSource = { (model) -> () in
 
             let urlStr = "https://icons.better-idea.org/icon?url="+(model.url)!+"&amp;size=70..120..200"
+            
+            Defaults[.defautSourceUrl] = urlStr
+            Defaults[.defautSource] = model.id!
+            Defaults.synchronize()
+            
             WeakSelf!.sourceBtn.kf.setImage(with: URL(string: urlStr), for: .normal)
             WeakSelf!.currentSource = model.id!
             WeakSelf!.refreshData()

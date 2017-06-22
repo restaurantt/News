@@ -51,7 +51,11 @@ class SourceCell: UICollectionViewCell {
         willSet {
             let urlStr = "https://icons.better-idea.org/icon?url="+(newValue?.url)!+"&amp;size=70..120..200"
             let url = URL(string: urlStr)
-            logoView.kf.setImage(with: url)
+            logoView.kf.setImage(with: url, placeholder: UIImage(named: "logo"), options: nil, progressBlock: { (current, total) in
+                
+            }) { (image, error, CacheType, imageUrl) in
+                
+            }
             titleLbl.text = newValue?.name
             
         }
