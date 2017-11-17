@@ -18,6 +18,11 @@ enum NewsAPI {
 
 
 extension NewsAPI: TargetType {
+
+    var headers: [String : String]? {
+        return nil
+    }
+    
     var baseURL: URL {
         return URL(string: "https://newsapi.org")!
     }

@@ -12,10 +12,11 @@ import Moya
 import RxCocoa
 import RxDataSources
 import SnapKit
-import ESPullToRefresh
+//import ESPullToRefresh
 import PKHUD
 import WebKit
 import SwiftyUserDefaults
+import MJRefresh
 
 extension DefaultsKeys {
     static let defautSourceUrl = DefaultsKey<String>("defautSourceUrl")
@@ -36,6 +37,7 @@ class ArticleListViewController: BaseViewController, UITableViewDelegate,UITable
 
     var sourceBtn = UIButton()
     var sourceItem: UIBarButtonItem?
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,7 +54,7 @@ class ArticleListViewController: BaseViewController, UITableViewDelegate,UITable
         if Defaults.hasKey("defautSourceUrl") {
             url = Defaults[.defautSourceUrl]
         } else {
-            url = defaultSourceUrl
+            url = defaultSmallSourceUrl
         }
         
         sourceBtn.kf.setImage(with: URL(string: url), for: .normal)
@@ -63,8 +65,13 @@ class ArticleListViewController: BaseViewController, UITableViewDelegate,UITable
         self.navigationItem.rightBarButtonItem = sourceItem
         
         setupView()
-        setRefreshView()
+        //setRefreshView()
         //setLoadMoreView()
+
+        
+        // 现在的版本要用mj_header
+        self.tableView.mj_header = MJRefreshNormalHeader.init(refreshingTarget: self, refreshingAction: #selector(refreshData))
+        
         
         bindData()
         requestData()
@@ -87,19 +94,20 @@ class ArticleListViewController: BaseViewController, UITableViewDelegate,UITable
         }
         
     }
-    
+
+/*
     func setRefreshView() {
-        self.tableView.es_addPullToRefresh {
+        self.tableView.es.addPullToRefresh {
             [weak self] in
             /// 在这里做刷新相关事件
             self?.refreshData()
             
             /// 如果你的刷新事件成功，设置completion自动重置footer的状态
-            //self?.tableView.es_stopPullToRefresh()
+//            self?.tableView.es.stopPullToRefresh()
             /// 设置ignoreFooter来处理不需要显示footer的情况
             //self?.tableView.es_stopPullToRefresh(completion: true, ignoreFooter: false)
         }
-    }
+    }*/
     
     func refreshData() {
         self.page = 0
@@ -159,8 +167,8 @@ class ArticleListViewController: BaseViewController, UITableViewDelegate,UITable
                     
                 })
             }, onCompleted: {
-                print("complete")
-                self.tableView.es_stopPullToRefresh()
+                print("get articles complete")
+                self.tableView.mj_header.endRefreshing()
             }) {
                 
             }.addDisposableTo(disposeBag)
@@ -214,7 +222,7 @@ class ArticleListViewController: BaseViewController, UITableViewDelegate,UITable
         // 第一用方法
         vc.didSelectSource = { (model) -> () in
 
-            let urlStr = "https://icons.better-idea.org/icon?url="+(model.url)!+"&amp;size=70..120..200"
+            let urlStr = "https://icons.better-idea.org/icon?url="+(model.url)!+"&amp;size=20..30..40"
             
             Defaults[.defautSourceUrl] = urlStr
             Defaults[.defautSource] = model.id!
@@ -244,13 +252,44 @@ extension ArticleListViewController:WKWebViewDelegate{
     func didSelectRightItem(webView: WKWebView, itemTag: String) {
         print("点击了右边按钮")
         if itemTag == "Share" {
-            let activity = UIActivity.init()
-            let items:[Any] = [webView.title as Any,
-                               URL(string: (webView.url?.absoluteString)!) as Any]
-            let activityVC = UIActivityViewController.init(activityItems: items, applicationActivities: [activity])
-            self.present(activityVC, animated:true, completion:nil)
+            
+            let alertC = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+            let shareAction = UIAlertAction(title: "Share", style: .default, handler: { (action) in
+                self.shareAction(webView: webView)
+            })
+            
+            let webAction = UIAlertAction(title: "Safari", style: .default, handler: { (action) in
+                self.webAction(webView: webView)
+            })
+            
+            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: { (action) in
+                
+            })
+            
+            alertC.addAction(shareAction)
+            alertC.addAction(webAction)
+            alertC.addAction(cancelAction)
+            
+            self.present(alertC, animated: true, completion: {
+                
+            })
         }
     }
+    
+    func shareAction(webView: WKWebView) {
+        let activity = UIActivity.init()
+        let items:[Any] = [webView.title as Any,
+                           URL(string: (webView.url?.absoluteString)!) as Any]
+        let activityVC = UIActivityViewController.init(activityItems: items, applicationActivities: [activity])
+        self.present(activityVC, animated:true, completion:nil)
+    }
+    
+    func webAction(webView: WKWebView) {
+        
+        UIApplication.shared.openURL(webView.url!)
+        
+    }
+    
 //    
 //    func didRunJavaScript(webView: WKWebView, result: Any?, error: Error?) {
 //        print("执行JS结果")

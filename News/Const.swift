@@ -13,4 +13,5 @@ let ScreenWidth = UIScreen.main.bounds.size.width
 let ScreenHeight = UIScreen.main.bounds.size.height
 
 let defaultSourceUrl = "https://icons.better-idea.org/icon?url=http://us.cnn.com&amp;size=70..120..200"
+let defaultSmallSourceUrl = "https://icons.better-idea.org/icon?url=http://us.cnn.com&amp;size=20..30..40"
 let defaultSource = "cnn"

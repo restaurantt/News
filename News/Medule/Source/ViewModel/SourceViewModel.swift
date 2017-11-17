@@ -18,6 +18,7 @@ class SourceViewModel: BaseViewModel {
     private let provider = RxMoyaProvider<NewsAPI>()
     
     func getSources() -> Observable<BaseSourceModel> {
+
         return provider.request(.Sources(category: "", language: "", country: ""))
             .filterSuccessfulStatusCodes()
             .mapJSON()

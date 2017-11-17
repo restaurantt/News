@@ -15,7 +15,6 @@ class ArticleListViewModel: BaseViewModel {
 //    var articleArray = [ArticleModel]()
     var articleArray = NSMutableArray()
     
-    
     private let provider = RxMoyaProvider<NewsAPI>()
     
     func getArticles(page:Int, source:String) -> Observable<BaseArticleModel> {
